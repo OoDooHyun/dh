@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Species">
+	<resultMap type="speciesMap" id="SpeciesVO">
+		<id property="speciesShow"	column="species_show"/>
+		<result property="speciesNm"	column="species_nm"/>
+	</resultMap>
+	
+	<select id="selectSpeciesList" resultMap="SpeciesVO">
+		<![CDATA[
+			SELECT
+				species_nm, species_show
+			FROM
+				tb_species
+		]]>
+	</select>
+	
+	
+</mapper>

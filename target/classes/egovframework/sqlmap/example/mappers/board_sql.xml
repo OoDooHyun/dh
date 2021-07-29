@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Board">
+
+	<resultMap type="boardMap" id="BoardVO">
+		<id property="idx"	column="idx"/>
+		<result property="title"	column="title"/>
+		<result property="content"	column="content"/>
+		<result property="writerId"	column="writer_id"/>
+		<result property="writerName"	column="writer_name"/>
+		<result property="registDate"	column="regist_date"/>
+		<result property="modifyDate"	column="modify_date"/>
+	</resultMap>
+
+	<select id = "selectBoardList" resultMap="BoardVO" parameterType="hashmap">
+      <![CDATA[
+      
+         SELECT B.*, U.nickname AS writer_name
+         FROM 
+            tb_board B INNER JOIN tb_user U ON B.writer_id = U.user_id 
+         ]]>
+         <where>
+            <if test="title != ''">
+               B.title LIKE CONCAT('%', #{title}, '%')
+            </if>
+         </where>
+         
+         
+      <![CDATA[
+         ORDER BY B.idx ASC
+         
+         LIMIT #{startList}, #{listSize}
+      ]]>
+      
+   </select>
+	<select id="selectBoard" parameterType="long" resultMap="BoardVO">
+		<![CDATA[ 
+			SELECT 
+				A.*, B.nickname AS writer_name
+			FROM 
+				tb_board A INNER JOIN tb_user B ON A.writer_id = B.user_id
+			WHERE
+				A.idx = #{idx}
+		]]>
+	</select>
+	<select id="selectBoardListCnt" parameterType="String" resultType="int">
+		<![CDATA[ 
+			SELECT
+				count(*)
+			FROM
+				tb_board
+		]]>
+		<where>
+			<if test="value != ''">
+				title LIKE CONCAT('%', #{value}, '%')
+			</if>
+		</where>
+	</select>
+	
+	<insert id="insertBoard" parameterType="boardMap">
+		<![CDATA[ 
+			INSERT INTO tb_board
+				(title, content, writer_id)
+			VALUE 
+				(#{title}, #{content}, #{writerId})
+		]]>
+	</insert>
+	
+	<delete id="deleteBoard" parameterType="long">
+		<![CDATA[ 
+			DELETE FROM tb_board
+			WHERE
+				idx = #{idx}
+		]]>
+	</delete>
+	
+	<update id="updateBoard" parameterType="boardMap">
+		<![CDATA[ 
+			UPDATE tb_board
+			SET
+				title = #{title},
+				content = #{content},
+				modify_date = NOW()
+			WHERE
+				idx = #{idx}
+		]]>
+	</update>
+</mapper>

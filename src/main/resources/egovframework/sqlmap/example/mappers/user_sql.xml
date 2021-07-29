@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="User">
+
+	<resultMap type="userMap" id="UserVO">
+		<id property="userId"			column="user_id"/>
+		<result property="pwd"         column="pwd"/>
+		<result property="nickname"         column="nickname"/>
+		<result property="speciesNm"		column="species_nm"/>
+		<result property="speciesShow"	column="species_show"/>
+		<result property="job"         column="job"/>
+		<result property="phone"         column="phone"/>
+		<result property="userEmail"         column="user_email"/>
+		
+	</resultMap>
+	
+	<select id="selectPwd" parameterType="String" resultType="String">
+		<![CDATA[ 
+			SELECT 
+				pwd
+			FROM 
+				tb_user
+			WHERE
+				user_id = #{userId}
+		]]>
+	</select>
+	
+	<select id="selectUserInfo" parameterType="String" resultMap="UserVO">
+		<![CDATA[ 
+			SELECT 
+				A.user_id, A.nickname, B.species_show, A.job, A.phone, A.user_email
+			FROM 
+				TB_USER A INNER JOIN TB_SPECIES B ON A.species_nm = B.species_nm
+			WHERE
+				user_id = #{userId}
+		]]>
+	</select>
+	
+	<insert id="insertUser" parameterType ="UserMap" >
+		<![CDATA[
+			INSERT INTO tb_user
+				(user_id, pwd, nickname, species_nm, job, phone, email)
+			VALUES
+				(#{userId}, #{pwd}, #{nickname}, #{speciesNm}, #{job}, #{email})
+		]]>
+	</insert>
+	
+	<update id="updateUser" parameterType = "UserMap">
+		<![CDATA[
+			UPDATE tb_user
+			SET
+				pwd = #{pwd},
+				nickname = #{nickname},
+				species = #{speicesNm},
+				job = #{job},
+				phone = #{phone},
+				email = #{email}
+			WHERE
+				user_id = #{userId}
+		]]>
+	</update>
+	
+	<delete id="deleteUser" parameterType="String">
+		<![CDATA[
+			DELETE FROM tb_user
+			WHERE
+				user_id=#{userId}
+				]]>
+	
+	</delete>
+</mapper>
