@@ -45,7 +45,7 @@
 			<tr>
 				<th>종족</th>
 				<td>
-				<select name="speciesShow">
+				<select name="speciesNm">
 					<c:forEach items="${species}" var="item">
 						<option value="${item.speciesNm}"><c:out value="${item.speciesShow}"/></option>
 					</c:forEach>
@@ -62,7 +62,7 @@
 			</tr>
 			<tr>
 				<th>이메일</th>
-				<td><input type="text" name="email" value="${USER.userEmail}"/></td>
+				<td><input type="text" name="userEmail" value="${USER.userEmail}"/></td>
 				</tr>
 				</tbody>
 		</table>
@@ -79,8 +79,8 @@
 		var bye = document.getElementById('bye');
 		
 		ok.onclick = function(){
-			var pwd = document.getElementById("pwdInPut").value;
-			var pwdCheck = document.getElementById("pwdCheckInPut").value;
+			var pwd = document.getElementById("pwdInput").value;
+			var pwdCheck = document.getElementById("pwdCheckInput").value;
 			
 			if (pwd == pwdCheck){
 				document.getElementById("userInfoForm").submit();

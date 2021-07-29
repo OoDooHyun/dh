@@ -7,5 +7,6 @@
 		<typeAlias alias="userMap" type="du.user.domain.UserVO"/>
 		<typeAlias alias="speciesMap" type="du.species.domain.SpeciesVO"/>
 		<typeAlias alias="boardMap" type="du.board.domain.BoardVO"/>
+		<typeAlias alias="BoardAttFileVO" type="du.board.domain.BoardAttFileVO"/>
     </typeAliases>
 </configuration>

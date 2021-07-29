@@ -23,9 +23,10 @@
 					<td><input type="text" id="searchTitle"
 							value="<c:out value='${title }'></c:out>"/></td>
 					<td><button type="button" class="btn btn-primary" id="searchBtn">검색 </button></td>
+					<td><button type="button" class="btn btn-success" onclick="window.location.href='boardWritePage.do'">게시글 등록</button></td>
 				</tr>
 			</table>
-			<button type="button" class="btn btn-success" onclick="window.location.href='boardWritePage.do'">게시글 등록</button>
+<!-- 			<button type="button" class="btn btn-success" onclick="window.location.href='boardWritePage.do'">게시글 등록</button> -->
 		</div>
 	
 	
@@ -39,7 +40,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${boardList}" var="item">
+			<c:forEach items="${boardList}" var="item" varStatus="status">
 				<tr ondblclick="trDblClickEvent('${item.idx}')">
 					<td><c:out value="${status.count + pagination.startList}"/></td>
 					<td><c:out value="${item.title}"/></td>
@@ -64,6 +65,7 @@
 					<li class="page-item"><a class="page-link" href="#" onClick="fn_next('${pagination.range}', 
 						'${pagination.range}', '${pagination.rangeSize}')" >Next</a></li>
 				</c:if>
+				
 			</ul>
 		</div>
 		</section>

@@ -26,7 +26,7 @@
 		</tr>
 		<tr>
 			<th>*비밀번호 확인</th>
-			<td><input type="password" name="pwd" id="pwdCheckInput" required></td>
+			<td><input type="password" id="pwdCheckInput" required></td>
 		</tr>
 		<tr>
 			<th>*종족</th>

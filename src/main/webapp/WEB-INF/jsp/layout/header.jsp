@@ -15,7 +15,7 @@
 </head>
 <body>
 	<div class="LogoDiv">
-		<img alt="와우메인" src="${pageContext.request.contextPath}/images/WOWFONT2.png" onclick="window.location.href='mainPage.do'">
+		<img alt="와우메인" src="${pageContext.request.contextPath}/images/WOWFONT2.png" onclick="window.location.href='${pageContext.request.contextPath}/mainPage.do'">
 	</div>
 	<div class="userInfoDiv">
 		[<c:out value="${USER.nickname}"/>]님 반갑습니다

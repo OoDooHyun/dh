@@ -19,4 +19,18 @@ header {
 
 .LogoDiv > img {
 	width : 100%;
+
+}
+.infoUl {
+	margin: auto 0;
+}
+
+.infoUl > li > a {
+	text-decoration: none;
+	color: black;
+}
+
+#filterDiv {
+	display: flex;
+    justify-content: space-between;
 }

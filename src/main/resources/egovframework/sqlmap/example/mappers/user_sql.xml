@@ -39,9 +39,9 @@
 	<insert id="insertUser" parameterType ="UserMap" >
 		<![CDATA[
 			INSERT INTO tb_user
-				(user_id, pwd, nickname, species_nm, job, phone, email)
+				(user_id, pwd, nickname, species_nm, job, phone, user_email)
 			VALUES
-				(#{userId}, #{pwd}, #{nickname}, #{speciesNm}, #{job}, #{email})
+				(#{userId}, #{pwd}, #{nickname}, #{speciesNm}, #{job}, #{phone}, #{userEmail})
 		]]>
 	</insert>
 	
@@ -51,10 +51,10 @@
 			SET
 				pwd = #{pwd},
 				nickname = #{nickname},
-				species = #{speicesNm},
+				species_nm = #{speciesNm},
 				job = #{job},
 				phone = #{phone},
-				email = #{email}
+				user_email = #{userEmail}
 			WHERE
 				user_id = #{userId}
 		]]>
@@ -64,7 +64,7 @@
 		<![CDATA[
 			DELETE FROM tb_user
 			WHERE
-				user_id=#{userId}
+				user_id=#{value}
 				]]>
 	
 	</delete>

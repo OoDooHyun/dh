@@ -16,8 +16,6 @@
 	<header>
 		<jsp:include page="/WEB-INF/jsp/layout/header.jsp"></jsp:include>
 	</header>
-		<button type="button" class="btn btn-success" style="float: left" onclick="window.location.href='boardListPage.do'"> 
-			게시판 </button>
 		<img src="images/horde.jpg" onclick="window.location.href='boardListPage.do'"/>
 </body>
 </html>

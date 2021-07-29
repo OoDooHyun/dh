@@ -10,8 +10,11 @@
 		<result property="writerName"	column="writer_name"/>
 		<result property="registDate"	column="regist_date"/>
 		<result property="modifyDate"	column="modify_date"/>
+		<result property="attIdx"		column="att_idx"/>
+		<result property="attFilename"	column="att_filename"/>
 	</resultMap>
 
+	
 	<select id = "selectBoardList" resultMap="BoardVO" parameterType="hashmap">
       <![CDATA[
       
