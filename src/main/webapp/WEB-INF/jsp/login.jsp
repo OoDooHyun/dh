@@ -15,13 +15,17 @@
 	background-position:center;
 	background-attachment: fixed;
     background-size: cover;
+    
 	}
+	#centered { position:absolute; top:50%; height:50%;  }
+    .centeredV { position: absolute; left: 50%; transform: translateX(-50%); text-align:center }
 	</style>
 </head>
 <body>
 	
 	<h1 style=' padding: 150 ; text-align: center; color :#BDBDBD; '><strong>WOW PARTY FINDER</strong></h1>
 	<form action="login.do" method="post">
+	<div id="centered" class="centeredV">
 	<table style='margin: auto; '>
             <tr style='text-align: center;'>
                <th>ID</th>
@@ -31,15 +35,18 @@
                <th>PW</th>
                <td><input type="password" id="user_pw" name="pwd" placeholder="비밀번호를 입력해주세요"></td>
             </tr>
-            
+<!--            <button type="button" onclick="window.location.href='signUpPage.do'">회원가입</button> -->
+<!--            <button type="submit">로그인</button> -->
             
          </table>
-         
-         <div style='display:flex; position:absolute; top:59%; left:50.7%; transform: translate(-50%,-50%);'>
-            <button type="button" onclick="window.location.href='signUpPage.do'">회원가입</button>
-            <button type="submit">로그인</button>
+         <button type="button" onclick="window.location.href='signUpPage.do'">회원가입</button>
+           <button type="submit">로그인</button>
+        </div>
+<!--          <div style='display:flex; position:absolute; top:59%; left:50.7%; transform: translate(-50%,-50%);'> -->
+<!--             <button type="button" onclick="window.location.href='signUpPage.do'">회원가입</button> -->
+<!--             <button type="submit">로그인</button> -->
             
-         </div>
+<!--          </div> -->
          </form>
 </body>
 

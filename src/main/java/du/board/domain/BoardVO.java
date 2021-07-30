@@ -2,7 +2,6 @@ package du.board.domain;
 
 import java.time.LocalDateTime;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.springframework.web.multipart.MultipartFile;
 
 public class BoardVO {
@@ -88,7 +87,7 @@ public class BoardVO {
 	public MultipartFile getAttFile() {
 		return attFile;
 	}
-	
+
 	public void setAttFile(MultipartFile attFile) {
 		this.attFile = attFile;
 	}
@@ -107,7 +106,7 @@ public class BoardVO {
 
 	public void setAttFilename(String attFilename) {
 		this.attFilename = attFilename;
-	}	
+	}
 
 	public String getHandleType() {
 		return handleType;
@@ -116,7 +115,7 @@ public class BoardVO {
 	public void setHandleType(String handleType) {
 		this.handleType = handleType;
 	}
-
+	
 	public boolean isExistAttFile() {
 		return attFile != null && attFile.getSize() > 0;
 	}
@@ -127,10 +126,5 @@ public class BoardVO {
 	
 	public BoardAttFileVO getCriteria() {
 		return new BoardAttFileVO(attIdx, idx);
-	}
-	
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this);
 	}
 }

@@ -6,7 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,19 +21,23 @@ import du.board.domain.BoardVO;
 import du.board.service.BoardService;
 import du.common.DownloadView;
 import du.common.Pagination;
+import du.reply.domain.ReplyVO;
+import du.reply.service.ReplyService;
 
-
+@Controller
 public class BoardController {
 
 	@Autowired
 	private BoardService boardService;
+	
+	@Autowired
+	private ReplyService replyService;
 	
 	@RequestMapping("/boardListPage.do")
 	public ModelAndView boardListPage(
 			@RequestParam(required = false, defaultValue = "1") int page,
 			@RequestParam(required = false, defaultValue = "1") int range,
 			@RequestParam(required = false, defaultValue = "") String title) {
-		
 		ModelAndView mav = new ModelAndView("board/boardList.jsp");
 		
 		int listCnt = boardService.selectBoardListCnt(title);
@@ -41,6 +45,8 @@ public class BoardController {
 		Pagination pagination = new Pagination();
 		pagination.pageInfo(page, range, listCnt);
 		mav.addObject("pagination", pagination);
+		
+		
 		
 		List<BoardVO> boardList = boardService.selectBoardList(pagination, title);
 		mav.addObject("boardList", boardList);
@@ -56,7 +62,7 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/boardWrite.do")
-	public String boardWrite(HttpSession session, @ModelAttribute BoardVO board) throws Exception {
+	public String boardWrite(HttpSession session, @ModelAttribute BoardVO board) throws Exception{
 		boardService.insertBoard(board, session);
 		
 		return "redirect:/boardListPage.do";
@@ -68,57 +74,57 @@ public class BoardController {
 		
 		BoardVO board = boardService.selectBoard(idx);
 		
+//		System.out.println(board.getTitle());
+//		System.out.println(board.getContent());
+//		System.out.println(board.getWriterId());
+		
 		mav.addObject("board", board);
+		
+		List<ReplyVO> replyList = replyService.selectReply(idx);
+		mav.addObject("replyList", replyList);
+		
 		return mav;
 	}
 	
+	
 	@RequestMapping("/boardDelete.do")
-	public String boardDelete(BoardVO boardVO) {
+	public String boardDelete( BoardVO boardVO) {
 		boardService.deleteBoard(boardVO);
-		
+//		System.out.println(idx);
+//		System.out.println(second); 
+	
 		return "redirect:/boardListPage.do";
 	}
 	
 	@RequestMapping("/boardModifyPage.do")
 	public ModelAndView boardModifyPage(long idx) {
-		ModelAndView mav = new ModelAndView("board/boardModify.jsp");
 		
+		
+		ModelAndView mav = new ModelAndView("board/boardModify.jsp");
 		BoardVO board = boardService.selectBoard(idx);
+		
 		mav.addObject("board", board);
 		
 		return mav;
 	}
 	
-	@RequestMapping(value = "/boardModify.do", method = RequestMethod.POST)
-	public String boardModify(
-		@ModelAttribute BoardVO board,
-		HttpSession session
-	) throws Exception {
+	@RequestMapping(value="/boardModify.do", method = RequestMethod.POST)
+	public String boardModify(BoardVO board, HttpSession session) throws Exception{
 		
-		boardService.updateBoard(board, session);
+		boardService.updateBoard(board,session);
 		
-		return String.format(
-			"redirect:/boardInfoPage/%d.do", 
-			board.getIdx()
-		);
-		//return "redirect:/boardInfoPage/"+Long.toString(board.getIdx())+".do";
+		return String.format("redirect:/boardInfoPage/%d.do", board.getIdx());
 	}
 	
 	@RequestMapping(
-		value = "/download/boardAttFile.do",
-		method = RequestMethod.POST
-	)
+			value = "/download/boardAttFile.do",
+			method = RequestMethod.POST)
 	public View downloadBoardAttFile(
-		BoardAttFileVO criteria,
-		Model model
-	) throws Exception{
-		BoardAttFileVO attFileVO 
-			= boardService.findBoardAttFile(
-				criteria
-			);
-		File file = new File(
-			attFileVO.getFullAttFilePath()
-		);
+			BoardAttFileVO criteria,
+			Model model
+			) throws Exception{
+		BoardAttFileVO attFileVO = boardService.findBoardAttFile(criteria);
+		File file = new File(attFileVO.getFullAttFilePath());
 		
 		model.addAttribute("downloadFile", file);
 		model.addAttribute("downloadFilename", attFileVO.getOldFilename());

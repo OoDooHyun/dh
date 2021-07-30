@@ -5,6 +5,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <html>
 <head>
+<style>
+    #centered { position:absolute;  height:100%;  }
+    .centeredV { position: absolute; left: 50%; transform: translateX(-50%); text-align:center }
+</style>
 	<link rel="stylesheet" href="css/main.css">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
@@ -13,9 +17,15 @@
 	
 </head>
 <body>
+
+
 	<header>
 		<jsp:include page="/WEB-INF/jsp/layout/header.jsp"></jsp:include>
 	</header>
+	<div id="centered" class="centeredV">
 		<img src="images/horde.jpg" onclick="window.location.href='boardListPage.do'"/>
+		<h1>파티찾기 게시판으로 이동</h1>
+	</div>
+	
 </body>
 </html>
